@@ -1,0 +1,25 @@
+{
+    "name" : "nanjingboy/clown",
+    "type" : "library",
+    "description" : "Clown is a simple ActiveRecord library for PHP",
+    "keywords": ["ActiveRecord"],
+    "homepage": "https://github.com/nanjingboy/clown",
+    "license": "MIT",
+    "authors": [{
+        "name": "Tom Huang",
+        "email": "hzlhu.dargon@gmail.com"
+    }],
+    "require": {
+        "php": ">=5.4.0",
+        "nanjingboy/classloader": ">=0.1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "config": {
+        "bin-dir": "bin/"
+    },
+    "autoload": {
+        "classmap": ["lib/"]
+    }
+}
