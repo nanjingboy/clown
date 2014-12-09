@@ -28,4 +28,4 @@ $classLoader->addPrefix('Models', $modelsDirectory);
 $classLoader->register();
 ```
 
-* Get a config example from [test/configs/test/clown.php][https://github.com/nanjingboy/clown/tree/master/test/configs/test/clown.php]
+* Get a config example from [test](https://github.com/nanjingboy/clown/tree/master/test/configs/test/clown.php)
