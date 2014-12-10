@@ -29,3 +29,5 @@ $classLoader->register();
 ```
 
 * Get a config example from [test](https://github.com/nanjingboy/clown/tree/master/test/configs/test/clown.php)
+
+* Get api from [wiki](https://github.com/nanjingboy/clown/wiki)
