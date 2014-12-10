@@ -17,13 +17,6 @@ class ModelTest extends PHPUnit_Framework_TestCase
 
     public function testParseConditions()
     {
-        $this->assertEquals(
-            array(
-                'sql' => 'age > 10',
-                'values' => array()
-            ),
-            User::parseConditions('age > 10')
-        );
 
         $this->assertEquals(
             array(
