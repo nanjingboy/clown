@@ -1,7 +1,6 @@
 <?php
 namespace Clown;
 
-use Closure;
 use ReflectionClass;
 use ReflectionMethod;
 
