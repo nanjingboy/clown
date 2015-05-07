@@ -1,5 +1,5 @@
 <?php
-namespace Test\Src\ActiveRecord;
+namespace Test\Src;
 
 use Clown\Reflection;
 use Clown\Connection;
