@@ -10,3 +10,7 @@ class ClownException extends Exception
 class ConnectionException extends ClownException
 {
 }
+
+class CallbackException extends ClownException
+{
+}
