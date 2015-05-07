@@ -280,7 +280,7 @@ class Validation
                             $this->_model->id
                         )
                     );
-                    $valid = ($this->_model->exists($options) <= 0);
+                    $valid = ($this->_model->exists($options) === false);
                     break;
             }
 
