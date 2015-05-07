@@ -16,35 +16,7 @@ class Connection extends Singleton
     private $_connection;
     private $_hasBeganTransaction = false;
 
-    private function _execute($sql, $values = array())
-    {
-        try {
-            $prepares = $this->prepare($sql, $values);
-            $stmt = $this->_connection->prepare($prepares['sql']);
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $stmt->execute($prepares['values']);
-            return $stmt;
-        } catch (PDOException $e) {
-            throw new ConnectionException($e);
-        }
-    }
-
-    public function __construct()
-    {
-        $config = Config::instance()->get('server');
-        try {
-            $this->_connection = new PDO(
-                "mysql:dbname={$config['database']};host={$config['host']};port={$config['port']};charset=utf8",
-                $config['user'],
-                $config['password'],
-                self::$_PDO_OPTIONS
-            );
-        } catch (PDOException $e) {
-            throw new ConnectionException($e);
-        }
-    }
-
-    public function prepare($sql, $values = array())
+    private function _prepare($sql, $values = array())
     {
         if (empty($values)) {
             return array('sql' => $sql, 'values' => $values);
@@ -81,6 +53,34 @@ class Connection extends Singleton
         }
 
         return array('sql' => $sql, 'values' => $_values);
+    }
+
+    private function _execute($sql, $values = array())
+    {
+        try {
+            $prepares = $this->_prepare($sql, $values);
+            $stmt = $this->_connection->prepare($prepares['sql']);
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->execute($prepares['values']);
+            return $stmt;
+        } catch (PDOException $e) {
+            throw new ConnectionException($e);
+        }
+    }
+
+    public function __construct()
+    {
+        $config = Config::instance()->get('server');
+        try {
+            $this->_connection = new PDO(
+                "mysql:dbname={$config['database']};host={$config['host']};port={$config['port']};charset=utf8",
+                $config['user'],
+                $config['password'],
+                self::$_PDO_OPTIONS
+            );
+        } catch (PDOException $e) {
+            throw new ConnectionException($e);
+        }
     }
 
     public function fetch($sql, $values = array())

@@ -1,6 +1,7 @@
 <?php
 namespace Test\Lib\ActiveRecord;
 
+use Clown\Reflection;
 use Clown\Connection;
 use PHPUnit_Framework_TestCase;
 
@@ -14,9 +15,13 @@ class ConnectionTest extends PHPUnit_Framework_TestCase
                 'sql' => 'select * from users where age > 10',
                 'values' => array()
             ),
-            $connection->prepare(
-                'select * from users where age > 10',
-                array()
+            Reflection::invokeMethod(
+                $connection,
+                '_prepare',
+                array(
+                    'select * from users where age > 10',
+                    array()
+                )
             )
         );
 
@@ -25,9 +30,13 @@ class ConnectionTest extends PHPUnit_Framework_TestCase
                 'sql' => 'select * from users where age > ?',
                 'values' => array(10)
             ),
-            $connection->prepare(
-                'select * from users where age > ?',
-                array(10)
+            Reflection::invokeMethod(
+                $connection,
+                '_prepare',
+                array(
+                    'select * from users where age > ?',
+                    array(10)
+                )
             )
         );
 
@@ -36,12 +45,16 @@ class ConnectionTest extends PHPUnit_Framework_TestCase
                 'sql' => 'select * from users where id in (?,?) or (country = ? and city not in (?,?,?))',
                 'values' => array(1, 2, 'China', 'ShangHai', 'GuangZhou', 'BeiJing')
             ),
-            $connection->prepare(
-                'select * from users where id in (?) or (country = ? and city not in (?))',
+            Reflection::invokeMethod(
+                $connection,
+                '_prepare',
                 array(
-                    array(1, 2),
-                    'China',
-                    array('ShangHai', 'GuangZhou', 'BeiJing')
+                    'select * from users where id in (?) or (country = ? and city not in (?))',
+                    array(
+                        array(1, 2),
+                        'China',
+                        array('ShangHai', 'GuangZhou', 'BeiJing')
+                    )
                 )
             )
         );
