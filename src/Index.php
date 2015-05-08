@@ -3,28 +3,6 @@ namespace Clown;
 
 class Index extends Singleton
 {
-    public function parseFromDatabase($indexes)
-    {
-        $result = array();
-        foreach ($indexes as $index) {
-            if (!array_key_exists($index['key_name'], $result)) {
-                $options = array();
-                if ($index['key_name'] === 'PRIMARY') {
-                    $options = array('primary' => true);
-                } else if (Column::instance()->parseValue($index['non_unique'], 'boolean') === false) {
-                    $options = array('unique' => true);
-                }
-                $result[$index['key_name']] = array(
-                    'columns' => array(),
-                    'options' => $options
-                );
-            }
-            array_push($result[$index['key_name']]['columns'], $index['column_name']);
-        }
-
-        return $result;
-    }
-
     public function getName($columns, $options = array())
     {
         if (array_key_exists('primary', $options) && $options['primary'] === true) {
