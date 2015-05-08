@@ -24,7 +24,7 @@ require __DIR__ . '/vendor/autoload.php';
 Clown\Config::instance()->init($configPath);
 ```
 
-* Get a config example from [test](https://github.com/nanjingboy/clown/tree/master/test/configs/test/clown.php)
+* Get a config example from [test](https://github.com/nanjingboy/clown/blob/master/test/configs/clown.php)
 
 * Get api from [wiki](https://github.com/nanjingboy/clown/wiki)
 
