@@ -1,6 +1,6 @@
 ### Clown:
 
-A simple ActiveRecord library for PHP.
+A simple PHP ActiveRecord library for Mysql.
 
 ### Getting Started:
 
@@ -21,11 +21,7 @@ A simple ActiveRecord library for PHP.
 ```php
 <?php
 require __DIR__ . '/vendor/autoload.php';
-Clown\Config::init($configPath);
-
-$classLoader = new ClassLoader();
-$classLoader->addPrefix('Models', $modelsDirectory);
-$classLoader->register();
+Clown\Config::instance()->init($configPath);
 ```
 
 * Get a config example from [test](https://github.com/nanjingboy/clown/tree/master/test/configs/test/clown.php)
