@@ -5,6 +5,10 @@ class Index extends Singleton
 {
     public function getName($columns, $options = array())
     {
+        if (!is_array($columns)) {
+            $columns = array($columns);
+        }
+
         if (array_key_exists('primary', $options) && $options['primary'] === true) {
             return 'PRIMARY';
         }
@@ -18,6 +22,10 @@ class Index extends Singleton
 
     public function add($table, $columns, $options = array())
     {
+        if (!is_array($columns)) {
+            $columns = array($columns);
+        }
+
         $name = $this->getName($columns, $options);
         $keys = '`' . implode('`,`', $columns) . '`';
         if ($name === 'PRIMARY') {

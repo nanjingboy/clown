@@ -60,6 +60,10 @@ class Table extends Singleton
             $column = $arguments[0];
             $options = (!empty($arguments[1]) ? $arguments[1] : array());
             if ($method === 'index') {
+                if (!is_array($column)) {
+                    $column = array($column);
+                }
+
                 $this->indexes = array_merge(
                     $this->indexes,
                     array(

@@ -24,7 +24,7 @@ class TableTest extends PHPUnit_Framework_TestCase
                 $table->integer('age', array('unsigned' => true));
                 $table->string('name', array('length' => 40));
                 $table->timestamps();
-                $table->index(array('name'));
+                $table->index('name');
             })
         );
 
