@@ -262,7 +262,11 @@ class Column extends Singleton
            $columns = Connection::instance()->fetch("desc {$table}");
            $tmp = array();
            foreach ($columns as $item) {
-                $tmp[$item['field']] = $this->parseFromDatabase($item);
+                $_column = array();
+                foreach ($item as $key => $value) {
+                    $_column[strtolower($key)] = $value;
+                }
+                $tmp[$_column['field']] = $this->parseFromDatabase($_column);
            }
            $columns = $tmp;
            $cache[$table] = $columns;
