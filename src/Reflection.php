@@ -19,34 +19,10 @@ class Reflection
         return self::$_reflectionClasses[$className];
     }
 
-    public static function invokeMethod($class, $methodName, $arguments = array(), $closure = null)
+    public static function invokeMethod($class, $methodName, $arguments = array())
     {
         $method = new ReflectionMethod($class, $methodName);
-        if (is_callable($closure) && $closure($method) === false) {
-            return;
-        }
-
         $method->setAccessible(true);
         return $method->invokeArgs($class, $arguments);
-    }
-
-    public static function invokeStaticMethod($class, $methodName, $arguments = array())
-    {
-        return static::invokeMethod(
-            $class, $methodName, $arguments,
-            function($method) {
-                return $method->isStatic();
-            }
-        );
-    }
-
-    public static function invokeInstanceMethod($class, $methodName, $arguments = array())
-    {
-        return static::invokeMethod(
-            $class, $methodName, $arguments,
-            function($method) {
-                return $method->isStatic() === false;
-            }
-        );
     }
 }

@@ -95,7 +95,7 @@ class Callback
         }
     }
 
-    public function call($type, $ignoreInstanceMethod = false)
+    public function call($type)
     {
         $callbacks = $this->_getCallbacks($type);
         foreach ($callbacks as $callback) {
@@ -103,15 +103,9 @@ class Callback
             if ($callback instanceof Closure) {
                 $result = $callback($this->_model);
             } else {
-                if ($ignoreInstanceMethod) {
-                    $result = Reflection::invokeStaticMethod(
-                        $this->_model, $callback
-                    );
-                } else {
-                    $result = Reflection::invokeMethod(
-                        $this->_model, $callback
-                    );
-                }
+                $result = Reflection::invokeMethod(
+                    $this->_model, $callback
+                );
             }
             if ($result === false && strpos($type, 'before_') === 0) {
                 return false;
