@@ -30,16 +30,12 @@ class Connection extends Singleton
                     return ' = ?';
                 }
                 $values = array_shift($arrayValues);
-                if (count($values) === 1) {
+                $valuesCount = count($values);
+                if ($valuesCount === 1) {
                     return ' = ?';
                 }
-                $prepareSymbols = array_map(
-                    function() {
-                        return '?';
-                    },
-                    $values
-                );
-                return ' in (' . implode(',', $prepareSymbols) . ')';
+
+                return ' in (' . implode(',', array_fill(0, $valuesCount, '?')) . ')';
             },
             $sql
         );
